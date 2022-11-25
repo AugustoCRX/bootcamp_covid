@@ -26,3 +26,5 @@ Nessa seção é possível consultar as metodologias empregadas na extração de
 | lat | Numérica discreta | Latitude | - |
 | long | Numérica discreta | Longitude | - |
 | sentiment (implementação futura) | Categórico nominal | Descrição do sentimento do tweet | - |
+
+OBS: OS DADOS DO MÉXICO E ESPANHA ESTÃO SEM LATITUDE E LONGITUDE, POIS A COLETA DE DADOS IRÁ DEMORAR
