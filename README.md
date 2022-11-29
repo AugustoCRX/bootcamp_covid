@@ -2,15 +2,14 @@
 ## Grupo 02
 ## Turma: C014
 ## Integrantes:
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; · Augusto Cesar Rodrigues Xavier
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LinkedIn: https://www.linkedin.com/in/augustocrx/
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: https://github.com/AugustoCRX
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; · Lucílio Fontes Moura
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LinkedIn: https://www.linkedin.com/in/luciliofm/
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: https://github.com/LucilioFM
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; · Bruno Rodrigues Barbosa
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LinkedIn: https://www.linkedin.com/in/bruno-rodrigues-40b555232/
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: https://github.com/brunodatac
+
+<div>&nbsp;</div>
+<h3>Augusto Cesar Rodrigues Xavier&nbsp;&nbsp<a href = "https://github.com/AugustoCRX" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/augustocrx/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
+        
+<h3>Lucílio Fontes Moura&nbsp;&nbsp&nbsp;<a href = "https://github.com/LucilioFM" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/luciliofm/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
+
+<h3>Bruno Rodrigues Barbosa&nbsp;&nbsp&nbsp;<a href = "https://github.com/brunodatac" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/bruno-rodrigues-40b555232/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
+
 
 &nbsp;
 # Desafio
