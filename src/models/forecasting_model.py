@@ -108,49 +108,52 @@ df = dados[dados['Country/Region'].isin(['Mexico', 'Argentina',
                                         'Ecuador', 'Chile', 'Spain'])]
 df['Date'] = pd.to_datetime(df.Date, format="%Y-%m-%d")
 
+rodando = True
+while rodando:
+    print("""
+    Deseja criar a previsão para o numero de confirmados para qual pais?
 
-print("""
-Deseja criar a previsão para o numero de confirmados para qual pais?
+    Todos     : 0
+    Argentina : 1
+    Chile     : 2
+    Equador   : 3
+    México    : 4
+    Espanha   : 5
+    """)
 
-Todos     : 0
-Argentina : 1
-Chile     : 2
-Equador   : 3
-México    : 4
-Espanha   : 5
-""")
+    países = ['Argentina', 'Chile', 'Ecuador', 'Mexico', 'Spain']
+    escolha = int(input('Digite o número: '))
+    país = países[escolha - 1]
 
-países = ['Argentina', 'Chile', 'Ecuador', 'Mexico', 'Spain']
-escolha = int(input('Digite o número: '))
-país = países[escolha - 1]
+    if escolha == 0:
+        serie = criar_serie(df, df['Country/Region'])
+    else:
+        serie = criar_serie(df, país)
 
-if escolha == 0:
-    serie = criar_serie(df, df['Country/Region'])
-    
-else:
-    serie = criar_serie(df, país)
-    
+    print('Previsão em andamento...')
+    predicao = Modelo_SARIMAX(  serie = serie,
+                                coluna = ['Confirmed'])
+    predicao.autoarima_e_treino()
+    print('Previsão realizada com sucesso!\n')
 
-print('Previsão em andamento...')
-predicao = Modelo_SARIMAX(  serie = serie,
-                            coluna = ['Confirmed'])
-predicao.autoarima_e_treino()
-
-print(f'\nDeseja ver as Metricas?\nNão : 0\nSim : 1')
-escolha_metricas = int(input('Digite o número: '))
-
-if escolha_metricas == 1:
-    print(f'\nMETRICAS')
-    print(predicao.metricas())
-    print(f'\nDeseja ver os graficos?\nNão : 0\nSim : 1')
+    print('\nDeseja ver as Metricas?\nNão : 0\nSim : 1')
+    escolha_metricas = int(input('Digite o número: '))
+    if escolha_metricas == 1:
+        print(f'\nMETRICAS')
+        print(predicao.metricas())
+        
+    print('\nDeseja ver os graficos?\nNão : 0\nSim : 1')
     graficos = int(input('Digite o número: '))
     if graficos == 1 and escolha > 0:
         print(f'\nGraficos do numero de confirmado - {país}')
         print(predicao.graficos())
     elif graficos == 1 and escolha == 0:
-        print(f'\nGraficos do numero de confirmado - Todos os Países')
+        print('\nGraficos do numero de confirmado - Todos os Países')
         print(predicao.graficos())
-        
-else:
-    print('FIM')
-
+        pass
+    
+    print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
+    escolha_continuar = int(input('Digite o número: '))
+    if escolha_continuar == 0:
+        rodando = False
+        print('\nPROGRAMA FINALIZADO!\n')
