@@ -3,21 +3,19 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# from statsmodels.tsa.stattools import adfuller 
-from statsmodels.tsa.statespace.sarimax import SARIMAX
-# from statsmodels.tsa.seasonal import seasonal_decompose
-
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_absolute_percentage_error
 
-# from sktime.utils.plotting import plot_series
-# from sktime.forecasting.model_selection import temporal_train_test_split
+from statsmodels.tsa.statespace.sarimax import SARIMAX
 
+import csv
 import warnings
 warnings.filterwarnings("ignore")
 sns.set_style()
+
+from pathlib import Path
 
 #!pip install pmdarima
 from pmdarima import auto_arima
@@ -152,8 +150,16 @@ while rodando:
         print(predicao.graficos())
         pass
     
+    print('\nDeseja salvar os dados da previsão?\nNão : 0\nSim : 1')
+    escolha_salvar = int(input('Digite um número: '))
+    if escolha_salvar == 1:
+        predicao_csv = predicao.test.copy()
+        predicao_csv['pred'] = predicao.pred.copy()
+        predicao_csv.to_csv(r'{}\src\data\model_results_forecast\{}.csv'.format(caminho, str(país)))
+    
     print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
     escolha_continuar = int(input('Digite o número: '))
     if escolha_continuar == 0:
         rodando = False
         print('\nPROGRAMA FINALIZADO!\n')
+
