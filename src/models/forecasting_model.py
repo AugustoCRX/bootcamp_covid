@@ -100,8 +100,8 @@ class Modelo_SARIMAX():
         plt.show()
 
 
-
-dados = pd.read_csv(r'D:\Blue EdTech\Bootcamp\dados\full_grouped.csv')
+caminho = Path(__file__).resolve().parents[2]
+dados = pd.read_csv(r'{}/blob/main/data/bronze/covid_raw/full_grouped.csv'.format(caminho))
 df = dados[dados['Country/Region'].isin(['Mexico', 'Argentina', 
                                         'Ecuador', 'Chile', 'Spain'])]
 df['Date'] = pd.to_datetime(df.Date, format="%Y-%m-%d")
@@ -139,7 +139,7 @@ while rodando:
     if escolha_metricas == 1:
         print(f'\nMETRICAS')
         print(predicao.metricas())
-        
+
     print('\nDeseja ver os graficos?\nNão : 0\nSim : 1')
     graficos = int(input('Digite o número: '))
     if graficos == 1 and escolha > 0:
@@ -149,14 +149,14 @@ while rodando:
         print('\nGraficos do numero de confirmado - Todos os Países')
         print(predicao.graficos())
         pass
-    
+
     print('\nDeseja salvar os dados da previsão?\nNão : 0\nSim : 1')
     escolha_salvar = int(input('Digite um número: '))
     if escolha_salvar == 1:
         predicao_csv = predicao.test.copy()
         predicao_csv['pred'] = predicao.pred.copy()
         predicao_csv.to_csv(r'{}\src\data\model_results_forecast\{}.csv'.format(caminho, str(país)))
-    
+
     print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
     escolha_continuar = int(input('Digite o número: '))
     if escolha_continuar == 0:
