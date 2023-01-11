@@ -3,8 +3,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-
-
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
@@ -16,8 +14,6 @@ import csv
 import warnings
 warnings.filterwarnings("ignore")
 sns.set_style()
-
-#from pathlib import Path
 
 #!pip install pmdarima
 from pmdarima import auto_arima
@@ -102,8 +98,8 @@ class Modelo_SARIMAX():
         plt.show()
 
 
-#caminho = Path(__file__).resolve().parents[2]
-dados = pd.read_csv(r'D:\Blue EdTech\Bootcamp\dados\full_grouped.csv')
+
+dados = pd.read_csv(r'D:\Blue EdTech\Bootcamp\notebooks\bootcamp_covid-1\data\bronze\covid_raw\full_grouped.csv')
 df = dados[dados['Country/Region'].isin(['Mexico', 'Argentina', 
                                         'Ecuador', 'Chile', 'Spain'])]
 df['Date'] = pd.to_datetime(df.Date, format="%Y-%m-%d")
@@ -157,7 +153,8 @@ while rodando:
     if escolha_salvar == 1:
         predicao_csv = predicao.test.copy()
         predicao_csv['pred'] = predicao.pred.copy()
-        predicao_csv.to_csv(f'{str(país)}.csv')
+        predicao_csv.to_csv(f"D:\\Blue EdTech\\Bootcamp\\notebooks\\bootcamp_covid-1\\data\\results_model_forecast\\{país}.csv")
+
 
     print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
     escolha_continuar = int(input('Digite o número: '))
