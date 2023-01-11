@@ -132,29 +132,11 @@ while rodando:
     predicao.autoarima_e_treino()
     print('Previsão realizada com sucesso!\n')
 
-    print('\nDeseja ver as Metricas?\nNão : 0\nSim : 1')
-    escolha_metricas = int(input('Digite o número: '))
-    if escolha_metricas == 1:
-        print(f'\nMETRICAS')
-        print(predicao.metricas())
-
-    print('\nDeseja ver os graficos?\nNão : 0\nSim : 1')
-    graficos = int(input('Digite o número: '))
-    if graficos == 1 and escolha > 0:
-        print(f'\nGraficos do numero de confirmado - {país}')
-        print(predicao.graficos())
-    elif graficos == 1 and escolha == 0:
-        print('\nGraficos do numero de confirmado - Todos os Países')
-        print(predicao.graficos())
-        pass
-
-    print('\nDeseja salvar os dados da previsão?\nNão : 0\nSim : 1')
-    escolha_salvar = int(input('Digite um número: '))
-    if escolha_salvar == 1:
-        predicao_csv = predicao.test.copy()
-        predicao_csv['pred'] = predicao.pred.copy()
-        predicao_csv.to_csv(f"D:\\Blue EdTech\\Bootcamp\\notebooks\\bootcamp_covid-1\\data\\results_model_forecast\\{país}.csv")
-
+    predicao_csv = predicao.test.copy()
+    predicao_csv['pred'] = predicao.pred.copy()
+    predicao_csv.to_csv(f"D:\\Blue EdTech\\Bootcamp\\notebooks\\bootcamp_covid-1\\data\\results_model_forecast\\{país}.csv")
+    print(f'Arquivo - {país}.csv - foi gerado!')
+    print(f'Ele pode ser encontrado em - data/results_model_forecast/')
 
     print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
     escolha_continuar = int(input('Digite o número: '))
