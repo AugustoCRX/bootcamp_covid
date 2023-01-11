@@ -107,7 +107,7 @@ df['Date'] = pd.to_datetime(df.Date, format="%Y-%m-%d")
 rodando = True
 while rodando:
     print("""
-    Deseja criar a previsão para o numero de confirmados para qual pais?
+Deseja criar a previsão para o numero de confirmados para qual pais?
 
     Todos     : 0
     Argentina : 1
@@ -135,12 +135,11 @@ while rodando:
     predicao_csv = predicao.test.copy()
     predicao_csv['pred'] = predicao.pred.copy()
     predicao_csv.to_csv(f"D:\\Blue EdTech\\Bootcamp\\notebooks\\bootcamp_covid-1\\data\\results_model_forecast\\{país}.csv")
-    print(f'Arquivo - {país}.csv - foi gerado!')
-    print(f'Ele pode ser encontrado em - data/results_model_forecast/')
+    print(f"Arquivo '{país}.csv' foi gerado!")
+    print(f"Ele pode ser encontrado em 'data/results_model_forecast/'")
 
     print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
     escolha_continuar = int(input('Digite o número: '))
     if escolha_continuar == 0:
         rodando = False
         print('\nPROGRAMA FINALIZADO!\n')
-
