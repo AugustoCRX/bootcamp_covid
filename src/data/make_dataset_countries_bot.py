@@ -87,9 +87,8 @@ def main(output_filepath):
     df_analise = publicacoes[(data_inicio <= publicacoes['date']) &  (data_final > publicacoes['date']) ]
 
 
-    
     # saving the dataset
-    df_analise.to_csv(r'{}\data\gold\twitter_gold\df_analise.csv'.format(output_filepath))
+    df_analise.to_csv(r'{}\data\results_twitter\df_analise.csv'.format(output_filepath))
     print("Finishing Prediction's dataset...\n")
     print("Execution time: %s seconds \n" % (time.time() - start_time))
     
