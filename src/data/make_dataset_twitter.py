@@ -54,16 +54,6 @@ def main(output_filepath):
         print('Reading data...')
 
 
-        # path_country = r"{}\data\external\twitter\{}\DATA".format(project_dir, country)
-        # path_list = glob.glob(os.path.join(path_country, '*/*'))
-        # print('Loading json files...')
-        # # extraindo json e criando lista
-        # dict_country = list()
-        # for i in range(len(path_list)):
-        #     with open(path_list[i], 'r', encoding='utf8') as f:
-        #         dict_country.append(json.load(f))
-
-
         path_country = r"{}\data\external\twitter\{}\DATA".format(project_dir, country)
         path_list = glob.glob(os.path.join(path_country, '*/*'))
         print('Loading json files...')
@@ -73,7 +63,6 @@ def main(output_filepath):
             dict_country.append(read_json_file(path_list[i]))
         dict_country = flatten_list(dict_country)
 
-        
 
         if bot_activation == 1:
             #Extração do "place_id" para coleta de dados geográficos
@@ -125,6 +114,7 @@ def main(output_filepath):
         for i in itens:
             with open(f'{geo_path}/{i}', 'r', encoding='utf8') as f:
                 dict_country_GEO.append(json.load(f))
+                
         print('Building the data...')
         #Construção dos dados
         all_text = []
