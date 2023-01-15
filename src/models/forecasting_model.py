@@ -19,15 +19,22 @@ sns.set_style()
 from pmdarima import auto_arima
 
 
-def criar_serie(df, nome_pais):
+# def create_series(df, country):
 
-    filtro = df[df['Country/Region'] == nome_pais]
-    pais = filtro[['Date', 'Confirmed', 'Deaths']]
+#     filtro = df[df['Country/Region'] == country]
+#     pais = filtro[['Date', 'Confirmed', 'Deaths']]
     
-    pd.to_datetime(pais.Date)
-    pais.set_index('Date', inplace=True)
+#     pd.to_datetime(pais.Date)
+#     pais.set_index('Date', inplace=True)
     
-    return pais
+#     return pais
+
+def create_series(df, country):
+    country_filter = df[df['Country/Region'] == country]
+    country_data = country_filter[['Date', 'Confirmed', 'Deaths']]
+    country_data['Date'] = pd.to_datetime(country_data['Date'])
+    country_data.set_index('Date', inplace=True)
+    return country_data
 
 
 class SARIMAXModel():
@@ -139,16 +146,21 @@ def create_forecast(df):
         print("""
     Deseja criar a previsão para o numero de confirmados para qual pais?
 
-    Todos     : 0
-    Argentina : 1
-    Chile     : 2
-    Ecuador   : 3
-    Mexico    : 4
-    Spain     : 5
+    Argentina : 0
+    Chile     : 1
+    Ecuador   : 2
+    Mexico    : 3
+    Spain     : 4
     """)
 
         choice = int(input('Digite um número: '))
-        country = countries[choice - 1] if choice != 0 else None
+        #country = countries[choice - 1] if choice != 0 else None
+        country = countries[choice]
+        
+        # if choice == 0:
+        #     series = create_series(df, df['Country/Region'])
+        # else:
+        #     series = create_series(df, country)
 
         series = create_series(df, country)
         print('Previsão em andamento...')
@@ -167,3 +179,6 @@ def create_forecast(df):
         if continue_choice == 0:
             running = False
             print('\nPROGRAMA FINALIZADO!\n')
+       
+     
+create_forecast(df)
