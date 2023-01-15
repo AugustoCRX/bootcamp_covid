@@ -137,9 +137,9 @@ def create_forecast(df):
     running = True
     while running:
         print("""
-    Which country would you like to create the forecast for?
+    Deseja criar a previsão para o numero de confirmados para qual pais?
 
-    All       : 0
+    Todos     : 0
     Argentina : 1
     Chile     : 2
     Ecuador   : 3
@@ -147,23 +147,23 @@ def create_forecast(df):
     Spain     : 5
     """)
 
-        choice = int(input('Enter the number: '))
+        choice = int(input('Digite um número: '))
         country = countries[choice - 1] if choice != 0 else None
 
         series = create_series(df, country)
-        print('Forecasting in progress...')
+        print('Previsão em andamento...')
         forecast = SARIMAXModel(series, ['Confirmed'])
         forecast.fit_and_predict()
-        print('Forecast completed successfully!\n')
+        print('Previsão realizada com sucesso!\n')
 
         forecast_csv = forecast.test.copy()
         forecast_csv['prediction'] = forecast.predictions.copy()
         forecast_csv.to_csv(f"D:\\Blue EdTech\\Bootcamp\\notebooks\\bootcamp_covid-1\\data\\results_model_forecast\\{country}.csv")
-        print(f"File '{country}.csv' was generated!")
-        print(f"It can be found in 'data/results_model_forecast/'")
+        print(f"Arquivo '{country}.csv' foi gerado!")
+        print(f"Ele pode ser encontrado em 'data/results_model_forecast/'")
 
-        print('\nWould you like to make new forecasts?\nNo : 0\nYes : 1')
-        continue_choice = int(input('Enter the number: '))
+        print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
+        continue_choice = int(input('Digite um número: '))
         if continue_choice == 0:
             running = False
-            print('\nPROGRAM ENDED!\n')
+            print('\nPROGRAMA FINALIZADO!\n')
