@@ -19,16 +19,6 @@ sns.set_style()
 from pmdarima import auto_arima
 
 
-# def create_series(df, country):
-
-#     filtro = df[df['Country/Region'] == country]
-#     pais = filtro[['Date', 'Confirmed', 'Deaths']]
-    
-#     pd.to_datetime(pais.Date)
-#     pais.set_index('Date', inplace=True)
-    
-#     return pais
-
 def create_series(df, country):
     country_filter = df[df['Country/Region'] == country]
     country_data = country_filter[['Date', 'Confirmed', 'Deaths']]
@@ -93,52 +83,6 @@ class SARIMAXModel():
         plt.show()
 
 
-data = pd.read_csv(r'D:\Blue EdTech\Bootcamp\notebooks\bootcamp_covid-1\data\bronze\covid_raw\full_grouped.csv')
-df = data[data['Country/Region'].isin(['Mexico', 'Argentina', 
-                                        'Ecuador', 'Chile', 'Spain'])]
-df['Date'] = pd.to_datetime(df.Date, format="%Y-%m-%d")
-
-# rodando = True
-# while rodando:
-#     print("""
-# Deseja criar a previsão para o numero de confirmados para qual pais?
-
-#     Todos     : 0
-#     Argentina : 1
-#     Chile     : 2
-#     Equador   : 3
-#     México    : 4
-#     Espanha   : 5
-#     """)
-
-#     países = ['Argentina', 'Chile', 'Ecuador', 'Mexico', 'Spain']
-#     escolha = int(input('Digite o número: '))
-#     país = países[escolha - 1]
-
-#     if escolha == 0:
-#         serie = criar_serie(df, df['Country/Region'])
-#     else:
-#         serie = criar_serie(df, país)
-
-#     print('Previsão em andamento...')
-#     predicao = Modelo_SARIMAX(  serie = serie,
-#                                 coluna = ['Confirmed'])
-#     predicao.autoarima_e_treino()
-#     print('Previsão realizada com sucesso!\n')
-
-#     predicao_csv = predicao.test.copy()
-#     predicao_csv['pred'] = predicao.pred.copy()
-#     predicao_csv.to_csv(f"D:\\Blue EdTech\\Bootcamp\\notebooks\\bootcamp_covid-1\\data\\results_model_forecast\\{país}.csv")
-#     print(f"Arquivo '{país}.csv' foi gerado!")
-#     print(f"Ele pode ser encontrado em 'data/results_model_forecast/'")
-
-#     print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
-#     escolha_continuar = int(input('Digite o número: '))
-#     if escolha_continuar == 0:
-#         rodando = False
-#         print('\nPROGRAMA FINALIZADO!\n')
-
-
 def create_forecast(df):
     countries = ['Argentina', 'Chile', 'Ecuador', 'Mexico', 'Spain']
     running = True
@@ -154,13 +98,7 @@ def create_forecast(df):
     """)
 
         choice = int(input('Digite um número: '))
-        #country = countries[choice - 1] if choice != 0 else None
         country = countries[choice]
-        
-        # if choice == 0:
-        #     series = create_series(df, df['Country/Region'])
-        # else:
-        #     series = create_series(df, country)
 
         series = create_series(df, country)
         print('Previsão em andamento...')
@@ -179,6 +117,11 @@ def create_forecast(df):
         if continue_choice == 0:
             running = False
             print('\nPROGRAMA FINALIZADO!\n')
-       
-     
+
+
+data = pd.read_csv(r'D:\Blue EdTech\Bootcamp\notebooks\bootcamp_covid-1\data\bronze\covid_raw\full_grouped.csv')
+df = data[data['Country/Region'].isin(['Mexico', 'Argentina', 
+                                        'Ecuador', 'Chile', 'Spain'])]
+df['Date'] = pd.to_datetime(df.Date, format="%Y-%m-%d")
+
 create_forecast(df)
