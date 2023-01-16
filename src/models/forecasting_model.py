@@ -17,6 +17,7 @@ sns.set_style()
 
 #!pip install pmdarima
 from pmdarima import auto_arima
+from pathlib import Path
 
 
 def create_series(df, country):
@@ -108,7 +109,7 @@ def create_forecast(df):
 
         forecast_csv = forecast.test.copy()
         forecast_csv['prediction'] = forecast.predictions.copy()
-        forecast_csv.to_csv(f"D:\\Blue EdTech\\Bootcamp\\notebooks\\bootcamp_covid-1\\data\\results_model_forecast\\{country}.csv")
+        forecast_csv.to_csv(r"{}\data\results_model_forecast\{}.csv".format(path, country))
         print(f"Arquivo '{country}.csv' foi gerado!")
         print(f"Ele pode ser encontrado em 'data/results_model_forecast/'")
 
@@ -119,7 +120,8 @@ def create_forecast(df):
             print('\nPROGRAMA FINALIZADO!\n')
 
 
-data = pd.read_csv(r'D:\Blue EdTech\Bootcamp\notebooks\bootcamp_covid-1\data\bronze\covid_raw\full_grouped.csv')
+path = Path(__file__).resolve().parents[2]
+data = pd.read_csv(r'{}\data\external\covid_data\full_grouped.csv'.format(path))
 df = data[data['Country/Region'].isin(['Mexico', 'Argentina', 
                                         'Ecuador', 'Chile', 'Spain'])]
 df['Date'] = pd.to_datetime(df.Date, format="%Y-%m-%d")
