@@ -61,7 +61,7 @@ def main(output_filepath):
     publications['text'] = publications['text'].apply(lambda x: ' '.join([word for word in x if word not in (stopwords)]))
 
     # padding the dataset
-    train = pd.read_csv(r'{}\notebooks\data\train.csv'.format(project_dir))
+    train = pd.read_csv(r'{}\data\twitter_ai\train\train.csv'.format(project_dir))
     tk = Tokenizer()
     tk.fit_on_texts(train['review_es'].apply(str))
     tk_publications = tk.texts_to_sequences(publications['text'].apply(str))
@@ -69,12 +69,12 @@ def main(output_filepath):
 
     # adding the prediction dimensionality to the dataset
     # loading the model and its parameters
-    json_file = open(r'{}\notebooks\data\model.json'.format(project_dir), 'r')
+    json_file = open(r'{}\data\twitter_ai\models\model.json'.format(project_dir), 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     loaded_model = model_from_json(loaded_model_json)
     # load weights into new model
-    loaded_model.load_weights(r'{}\notebooks\data\model.h5'.format(project_dir))
+    loaded_model.load_weights(r'{}\data\twitter_ai\models\model.h5'.format(project_dir))
     print("Loaded model from disk")
     
     # classifying the data
@@ -100,7 +100,7 @@ def main(output_filepath):
 
 
     # saving the dataset
-    df_analise.to_csv(r'{}\data\results_twitter\df_analise.csv'.format(output_filepath))
+    df_analise.to_csv(r'{}\data\twitter_ai\results\df_analise.csv'.format(output_filepath))
     print("Finishing Prediction's dataset...\n")
     print("Execution time: %s seconds \n" % (time.time() - start_time))
     
