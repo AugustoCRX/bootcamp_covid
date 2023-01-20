@@ -59,30 +59,6 @@ class SARIMAXModel():
         self.predictions = self.model.predict(start=start, end=end, dynamic=False, typ='levels')
         self.predictions.index = self.test.index
 
-    def evaluate(self):
-        print(f"R²: {r2_score(self.test, self.predictions):.2f}")
-        print(f"MAE: {mean_absolute_error(self.test, self.predictions):.2f}")
-        print(f"RMSE: {mean_squared_error(self.test, self.predictions, squared=False):.2f}")
-        print(f"MAPE: {mean_absolute_percentage_error(self.test, self.predictions)}")
-
-    def plot(self):
-        fig, axs = plt.subplots(2, 1, figsize=(10, 4), constrained_layout=True)
-
-        ax = axs[0]
-        ax.set_title(f'Prediction for {self.column}')
-        ax.plot(self.test, label='Test')
-        ax.plot(self.predictions, label='Prediction')
-        ax.legend(loc='best')
-
-        ax = axs[1]
-        ax.set_title(f'Prediction for {self.column}')
-        ax.plot(self.train, label='Train')
-        ax.plot(self.test, label='Test')
-        ax.plot(self.predictions, label='Prediction')
-        ax.legend(loc='best')
-
-        plt.show()
-
 
 def create_forecast(df):
     countries = ['Argentina', 'Chile', 'Ecuador', 'Mexico', 'Spain']
