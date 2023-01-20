@@ -27,7 +27,7 @@ def main(output_filepath):
     all.drop('Unnamed: 0', axis = 1)
     # carrega os dados em um dicionário
     # print(dict_df['COVID all data']['location'].isin([i.capitalize() for i in countries]))
-    query_country = dict_df['COVID all data'].isin({'location':[i.capitalize() for i in countries]})
+    query_country = dict_df['COVID all data'].loc[dict_df['COVID all data']['Country/Region'].isin([i.capitalize() for i in countries]), :]
     # pd.display(dict_df['COVID all data']['location'].isin([i.capitalize() for i in countries]))
      #Cria as colunas target
     print('Saving data...')
