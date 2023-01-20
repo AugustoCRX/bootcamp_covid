@@ -8,15 +8,18 @@ Original file is located at
 """
 
 # -*- coding: utf-8 -*-
+
+# necessário instalar os pacotes: pip install clean-text e pip install python-dotenv
+
 import click
 import logging
 from pathlib import Path
-!pip install clean-text
+# import cleantext
 from cleantext import clean
 from nltk.tokenize import TweetTokenizer
 from nltk.corpus import stopwords
 import nltk
-nltk.download('stopwords')
+# nltk.download()
 from string import punctuation
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -26,7 +29,7 @@ import json
 from keras.models import model_from_json
 import time
 import datetime
-!pip install python-dotenv
+# import dotenv
 from dotenv import find_dotenv, load_dotenv
 
 
@@ -81,7 +84,7 @@ def main(output_filepath):
     for i in range(0,list_size):
       sum = 0
       for j in range(0,725):
-        sum = predicao[i][j] + sum
+        sum = prediction[i][j] + sum
       pontuacao = sum/725
       if pontuacao < 0.5:
         list1.append(0)
