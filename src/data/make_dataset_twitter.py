@@ -63,7 +63,6 @@ def main(output_filepath):
             dict_country.append(read_json_file(path_list[i]))
         dict_country = flatten_list(dict_country)
 
-
         if bot_activation == 1:
             #Extração do "place_id" para coleta de dados geográficos
             data_extraction = []

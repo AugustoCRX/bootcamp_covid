@@ -4,6 +4,7 @@ import logging
 from pathlib import Path
 import pandas as pd
 import time
+import os
 from dotenv import find_dotenv, load_dotenv
 
 
@@ -16,30 +17,22 @@ def main(output_filepath):
         cleaned data ready to be analyzed (saved in ../processed).
     """
     print('Reading files...')
-    df = pd.read_csv(r'{}\data\external\covid_data\owid-covid-data.csv'.format(project_dir))
-    df0 = pd.read_csv(r'{}\data\bronze\twitter_bronze\AR_raw_data.csv'.format(project_dir))
-    df0['Country'] = 'Argentina'
-    df1 = pd.read_csv(r'{}\data\bronze\twitter_bronze\CL_raw_data.csv'.format(project_dir))
-    df1['Country'] = 'Chile'
-    df2 = pd.read_csv(r'{}\data\bronze\twitter_bronze\MX_raw_data.csv'.format(project_dir))
-    df2['Country'] = 'Mexico'
-    df3 = pd.read_csv(r'{}\data\bronze\twitter_bronze\EQ_raw_data.csv'.format(project_dir))
-    df3['Country'] = 'Ecuador'
-    df4 = pd.read_csv(r'{}\data\bronze\twitter_bronze\ES_raw_data.csv'.format(project_dir)) 
+    countries = os.listdir(r'{}\data\external\twitter'.format(project_dir))
+    dict_df = {'COVID all data': pd.read_csv(r'{}\data\external\covid_data\full_grouped.csv'.format(project_dir))}
+    for i in countries:
+        dict_df[i] = pd.read_csv(r'{}\data\bronze\twitter_bronze\{}_raw_data.csv'.format(project_dir, "".join(list(i)[0:2]).upper()))
     #A utilização destes dados se da por conta da origem dos dados do kaggle virem desses dados e já foi verificado que os dados são os mesmos,
     #com isso será utilizado os dados gerados na variável "df" para o andamento do trabalho
-    paises = ['Mexico', 'Argentina', 'Ecuador', 'Chile', 'Spain']
-    all = pd.concat([df0,df1,df2,df3,df4])
+    all = pd.concat([dict_df[i] for i in list(dict_df.keys())[1::]])
     all.drop('Unnamed: 0', axis = 1)
     # carrega os dados em um dicionário
-    query_country = df[df['location'].isin(paises)]
+    # print(dict_df['COVID all data']['location'].isin([i.capitalize() for i in countries]))
+    query_country = dict_df['COVID all data'].loc[dict_df['COVID all data']['Country/Region'].isin([i.capitalize() for i in countries]), :]
+    # pd.display(dict_df['COVID all data']['location'].isin([i.capitalize() for i in countries]))
      #Cria as colunas target
-    columns = ['date','population', 'diabetes_prevalence', 'median_age', 'total_vaccinations', 'hosp_patients','people_fully_vaccinated', 'total_vaccinations_per_hundred','people_vaccinated_per_hundred','people_fully_vaccinated_per_hundred','population_density', 'cardiovasc_death_rate','female_smokers', 'male_smokers', 'handwashing_facilities', 'hospital_beds_per_thousand', 'life_expectancy', 'human_development_index']
-    print('Quering data...')
-    add_info_data = query_country.loc[:, columns]
     print('Saving data...')
-    add_info_data.to_excel(r'{}\data\silver\add_info.xlsx'.format(output_filepath))
-    all.to_excel(r'{}\data\silver\twitter_data.xlsx'.format(output_filepath))
+    query_country.to_csv(r'{}\data\silver\covid\covid_silver.csv'.format(output_filepath))
+    all.to_csv(r'{}\data\silver\twitter\twitter_data.csv'.format(output_filepath))
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
     print('''

@@ -1,0 +1,12 @@
+prefix=e:/Blue/Bootcamp_2/github/bootcamp_covid/env/Library
+exec_prefix=e:/Blue/Bootcamp_2/github/bootcamp_covid/env/Library
+libdir=e:/Blue/Bootcamp_2/github/bootcamp_covid/env/Library/lib
+includedir=e:/Blue/Bootcamp_2/github/bootcamp_covid/env/Library/include
+
+Name: libzmq
+Description: 0MQ c++ library
+Version: 4.3.4
+Libs: -L${libdir} -lzmq
+Libs.private: -lstdc++ 
+Requires.private: 
+Cflags: -I${includedir} 
