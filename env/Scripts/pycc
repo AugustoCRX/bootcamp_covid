@@ -1,0 +1,3 @@
+#!d:\Blue EdTech\Bootcamp\notebooks\bootcamp_covid-1\env\python.exe
+from numba.pycc import main
+main()
