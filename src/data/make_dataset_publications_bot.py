@@ -14,7 +14,7 @@ Original file is located at
 import click
 import logging
 from pathlib import Path
-# import cleantext
+import cleantext
 from cleantext import clean
 import nltk
 from nltk.tokenize import TweetTokenizer
@@ -30,9 +30,8 @@ import json
 from keras.models import model_from_json
 import time
 import datetime
-# import dotenv
+import dotenv
 from dotenv import find_dotenv, load_dotenv
-
 
 @click.command()
 @click.argument('output_filepath', type=click.Path(), default = Path(__file__).resolve().parents[2])
