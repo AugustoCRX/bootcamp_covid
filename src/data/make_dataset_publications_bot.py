@@ -16,10 +16,11 @@ import logging
 from pathlib import Path
 # import cleantext
 from cleantext import clean
-from nltk.tokenize import TweetTokenizer
-from nltk.corpus import stopwords
 import nltk
-# nltk.download()
+from nltk.tokenize import TweetTokenizer
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+stopwords.words('spanish')
 from string import punctuation
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
@@ -57,8 +58,8 @@ def main(output_filepath):
     # removing stopwords and punctuation
     tt = TweetTokenizer()
     publications['text'] = publications['text'].apply(tt.tokenize)
-    stopwords = set(stopwords.words('spanish') + list(punctuation))
-    publications['text'] = publications['text'].apply(lambda x: ' '.join([word for word in x if word not in (stopwords)]))
+    list_stopwords_punctuation = set(stopwords.words('spanish') + list(punctuation))
+    publications['text'] = publications['text'].apply(lambda x: ' '.join([word for word in x if word not in (list_stopwords_punctuation)]))
 
     # padding the dataset
     train = pd.read_csv(r'{}\data\twitter_ai\train\train.csv'.format(project_dir))
@@ -93,11 +94,19 @@ def main(output_filepath):
     publications['prediction'] = list1
 
     # selecting the time range
-    publications['date'] = pd.to_datetime(publications.date, format="%Y-%m-%d")
-    date_start = datetime.datetime(2020, 2, 1)
-    date_final = datetime.datetime(2020, 7, 31)
-    df_analise = publications[(date_start <= publications['date']) &  (date_final > publications['date']) ]
+    # converting column 'date' from a string to datetime.
+    publications['date'] = pd.to_datetime(publications['date'])
 
+    # set the index to the 'date' column
+    publications.set_index('date', inplace=True)
+
+    # select time range
+    start_date = '2020-01-02'
+    end_date = '2020-07-31'
+    df_analise = publications.loc[start_date:end_date]
+    df = df_analise['Unnamed: 0'].reset_index()
+    df_analise.set_index('Unnamed: 0', inplace=True)
+    df_analise['date'] = df['date']
 
     # saving the dataset
     df_analise.to_csv(r'{}\data\twitter_ai\results\df_analise.csv'.format(output_filepath))

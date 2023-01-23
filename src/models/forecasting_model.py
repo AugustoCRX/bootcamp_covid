@@ -85,7 +85,7 @@ def create_forecast(df):
 
         forecast_csv = forecast.test.copy()
         forecast_csv['prediction'] = forecast.predictions.copy()
-        forecast_csv.to_csv(r"{}\data\results_model_forecast\{}.csv".format(path, country))
+        forecast_csv.to_csv(r"{}\data\results_model_forecast\{}.csv".format(path, country.lower()))
         print(f"Arquivo '{country}.csv' foi gerado!")
         print(f"Ele pode ser encontrado em 'data/results_model_forecast/'")
 
