@@ -16,7 +16,6 @@ import warnings
 warnings.filterwarnings("ignore")
 sns.set_style()
 
-#!pip install pmdarima
 from pmdarima import auto_arima
 from pathlib import Path
 
@@ -77,23 +76,40 @@ def create_forecast(df):
     Ecuador   : 2
     Mexico    : 3
     Spain     : 4
+    All       : 5
     """)
 
         choice = int(input('Digite um número: '))
-        country = countries[choice]
 
-        series = create_series(df, country)
-        print('Previsão em andamento...')
-        forecast = SARIMAXModel(series, ['Confirmed'])
-        forecast.fit_and_predict()
-        print('Previsão realizada com sucesso!\n')
+        if choice > 5:
+            print('Número invalido!\n')
+            
+        elif choice == 5:
+            print('Previsão em andamento...')
+            for i in countries:
+                series = create_series(df, i)
+                forecast = SARIMAXModel(series, ['Confirmed'])
+                forecast.fit_and_predict()
 
-        forecast_csv = forecast.test.copy()
-        forecast_csv['prediction'] = forecast.predictions.copy()
-        #forecast_csv.to_csv(r"{}\data\results_model_forecast\{}.csv".format(path, country.lower()))
-        forecast_csv.to_sql(name=f'covid_{country.lower()}_pred', con=engine, if_exists='replace')
-        print(f"Arquivo '{country}.csv' foi gerado!")
-        #print(f"Ele pode ser encontrado em 'data/results_model_forecast/'")
+                forecast_csv = forecast.test.copy()
+                forecast_csv['prediction'] = forecast.predictions.copy()
+                forecast_csv.to_sql(name=f'covid_{i.lower()}_pred', con=engine, if_exists='replace')
+            print('Previsão realizada com sucesso!\n')
+            print("Todos os arquivos foram gerados!")
+                
+        else:
+            country = countries[choice]
+            series = create_series(df, country)
+            print('Previsão em andamento...')
+            forecast = SARIMAXModel(series, ['Confirmed'])
+            forecast.fit_and_predict()
+            print('Previsão realizada com sucesso!\n')
+
+            forecast_csv = forecast.test.copy()
+            forecast_csv['prediction'] = forecast.predictions.copy()
+            forecast_csv.to_sql(name=f'covid_{country.lower()}_pred', con=engine, if_exists='replace')
+            print(f"Arquivo '{country}.csv' foi gerado!")
+
 
         print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
         continue_choice = int(input('Digite um número: '))
@@ -104,12 +120,15 @@ def create_forecast(df):
 
 # AWS
 engine = create_engine("mysql+mysqlconnector://admin:bootcamp_covid@database-1.cjpz0qecuge2.sa-east-1.rds.amazonaws.com/bootcamp_covid")
+port = int(input('port: '))
+user = input('user: ')
+password = input('password: ')
 cnx = mysql.connector.connect(
                                 host="database-1.cjpz0qecuge2.sa-east-1.rds.amazonaws.com",
-                                port = 3306,
-                                user="admin",
-                                password="bootcamp_covid",
-                                database = 'bootcamp_covid'
+                                port=port,
+                                user=user,
+                                password=password,
+                                database='bootcamp_covid'
                             )
 cur = cnx.cursor()
 
@@ -123,9 +142,6 @@ for i in data.columns:
         data.rename(columns = {i:re.sub(r'\s|_', r' ', i).capitalize()}, inplace = True)
     else:
         data.rename(columns= {i:"Country/Region"}, inplace=True)
-
-# path = Path(__file__).resolve().parents[2]
-# data = pd.read_csv(r'{}\data\external\covid_data\full_grouped.csv'.format(path))
 
 # Df com países escolhidos
 df = data[data['Country/Region'].isin(['Mexico', 'Argentina', 
