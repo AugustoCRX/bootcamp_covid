@@ -120,11 +120,14 @@ def create_forecast(df):
 
 # AWS
 engine = create_engine("mysql+mysqlconnector://admin:bootcamp_covid@database-1.cjpz0qecuge2.sa-east-1.rds.amazonaws.com/bootcamp_covid")
+port = int(input('port: '))
+user = input('user: ')
+password = input('password: ')
 cnx = mysql.connector.connect(
                                 host="database-1.cjpz0qecuge2.sa-east-1.rds.amazonaws.com",
-                                port = 3306,
-                                user="admin",
-                                password="bootcamp_covid",
+                                port =port,
+                                user=user,
+                                password=password,
                                 database = 'bootcamp_covid'
                             )
 cur = cnx.cursor()
