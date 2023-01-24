@@ -19,9 +19,9 @@ import cleantext
 from cleantext import clean
 import nltk
 from nltk.tokenize import TweetTokenizer
-nltk.download('stopwords')
+#nltk.download('stopwords')
 from nltk.corpus import stopwords
-stopwords.words('spanish')
+#stopwords.words('spanish')
 from string import punctuation
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
