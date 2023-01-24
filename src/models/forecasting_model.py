@@ -129,7 +129,7 @@ cnx = mysql.connector.connect(
                                 user=user,
                                 password=password,
                                 database='bootcamp_covid'
-                            )
+                             )
 cur = cnx.cursor()
 
 # Selecionando a query no servidor
