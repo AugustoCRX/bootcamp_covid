@@ -10,7 +10,8 @@ Original file is located at
 # -*- coding: utf-8 -*-
 
 # necessário instalar os pacotes: pip install clean-text e pip install python-dotenv
-
+!pip3 install tensorflow
+!pip3 install keras
 import click
 import logging
 from pathlib import Path
@@ -32,24 +33,48 @@ import time
 import datetime
 import dotenv
 from dotenv import find_dotenv, load_dotenv
+import mysql.connector
+from mysql.connector import Error
+from sqlalchemy import create_engine
 
 @click.command()
 @click.argument('output_filepath', type=click.Path(), default = Path(__file__).resolve().parents[2])
 def main(output_filepath):
-    start_time = time.time()
-    print("\nLoading countries's dataset...")
-    """ Execute data processing scripts to gather country dataset data (../raw)
-        and make them ready for sorting (saved in ../processed).
-    """
+  start_time = time.time()
+  print("\nLoading countries's dataset...")
+  """ Execute data processing scripts to gather country dataset data (../raw)
+      and make them ready for sorting (saved in ../processed).
+  """
+  host = input('Insert host link here ')
+  port = int(input('Insert port number here '))
+  user = input('Insert user ')
+  password = input('Insert password ')
+  database = input('Insert database name ')
+  print('Trying to connect to the database...')
+
+  #Creating engine and connection to database
+  engine = create_engine(f"mysql+mysqlconnector://{user}:{password}@{host}/{database}")
+  cnx = mysql.connector.connect(
+  host=host,
+  port = port,
+  user=user,
+  password=password,
+  database =database)
+  cur = cnx.cursor()
+
     print('Loading data...')
     print('Loading csv files...')
     countries = os.listdir(r'{}\data\external\twitter'.format(project_dir))
-    dict_df = {}
+   
+    #A query abaixo é uma tabela que contém dados de todos os paises e possui todas as colunas.
+    query_AI_twitter = ''
     for i in countries:
-      dict_df[i] = pd.read_csv(r'{}\data\bronze\twitter_bronze\{}_raw_data.csv'.format(project_dir, "".join(list(i)[0:2]).upper()))
-      dict_df[i]['country'] = i.capitalize()
+      if i != countries[-1]:
+        query_AI_twitter += f"SELECT * FROM {i.lower()}_raw_table WHERE {i.lower()}_raw_table.date <= '2020-07-27' UNION\n"
+      else:
+        query_AI_twitter += f"SELECT * FROM {i.lower()}_raw_table WHERE {i.lower()}_raw_table.date <= '2020-07-27'"
 
-    publications = pd.concat([dict_df[i] for i in list(dict_df.keys())])
+     publications = pd.read_sql(query_AI_twitter, engine)
 
     # removing emoji
     publications['text'] = publications['text'].apply(lambda x: clean(x, no_emoji=True))
@@ -108,6 +133,7 @@ def main(output_filepath):
     df_analise['date'] = df['date']
 
     # saving the dataset
+    df_analise.to_sql(name = 'twitter_ai_results', con=engine, if_exists='replace')
     df_analise.to_csv(r'{}\data\twitter_ai\results\df_analise.csv'.format(output_filepath))
     print("Finishing Prediction's dataset...\n")
     print("Execution time: %s seconds \n" % (time.time() - start_time))
