@@ -80,10 +80,10 @@ def create_forecast(df):
     """)
 
         choice = int(input('Digite um número: '))
-        
-        if choice < 0 or choice > 5:
-            print('Número invalido!\n')
 
+        if choice > 5:
+            print('Número invalido!\n')
+            
         elif choice == 5:
             print('Previsão em andamento...')
             for i in countries:
