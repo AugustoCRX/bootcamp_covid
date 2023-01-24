@@ -11,6 +11,7 @@ from sklearn.metrics import mean_absolute_percentage_error
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 import csv
+import re
 import warnings
 warnings.filterwarnings("ignore")
 sns.set_style()
@@ -18,6 +19,10 @@ sns.set_style()
 #!pip install pmdarima
 from pmdarima import auto_arima
 from pathlib import Path
+
+import mysql.connector
+from mysql.connector import Error
+from sqlalchemy import create_engine
 
 
 def create_series(df, country):
@@ -85,9 +90,10 @@ def create_forecast(df):
 
         forecast_csv = forecast.test.copy()
         forecast_csv['prediction'] = forecast.predictions.copy()
-        forecast_csv.to_csv(r"{}\data\results_model_forecast\{}.csv".format(path, country.lower()))
+        #forecast_csv.to_csv(r"{}\data\results_model_forecast\{}.csv".format(path, country.lower()))
+        forecast_csv.to_sql(name=f'covid_{country.lower()}_pred', con=engine, if_exists='replace')
         print(f"Arquivo '{country}.csv' foi gerado!")
-        print(f"Ele pode ser encontrado em 'data/results_model_forecast/'")
+        #print(f"Ele pode ser encontrado em 'data/results_model_forecast/'")
 
         print('\nGostaria de realizar novas previsões?\nNão : 0\nSim : 1')
         continue_choice = int(input('Digite um número: '))
@@ -96,8 +102,32 @@ def create_forecast(df):
             print('\nPROGRAMA FINALIZADO!\n')
 
 
-path = Path(__file__).resolve().parents[2]
-data = pd.read_csv(r'{}\data\external\covid_data\full_grouped.csv'.format(path))
+# AWS
+engine = create_engine("mysql+mysqlconnector://admin:bootcamp_covid@database-1.cjpz0qecuge2.sa-east-1.rds.amazonaws.com/bootcamp_covid")
+cnx = mysql.connector.connect(
+                                host="database-1.cjpz0qecuge2.sa-east-1.rds.amazonaws.com",
+                                port = 3306,
+                                user="admin",
+                                password="bootcamp_covid",
+                                database = 'bootcamp_covid'
+                            )
+cur = cnx.cursor()
+
+# Selecionando a query no servidor
+query_ts = 'SELECT * FROM covid_raw_data'
+data = pd.read_sql(query_ts, engine).drop('index', 1)
+
+# Alterando colunas
+for i in data.columns:
+    if i != 'country_region':
+        data.rename(columns = {i:re.sub(r'\s|_', r' ', i).capitalize()}, inplace = True)
+    else:
+        data.rename(columns= {i:"Country/Region"}, inplace=True)
+
+# path = Path(__file__).resolve().parents[2]
+# data = pd.read_csv(r'{}\data\external\covid_data\full_grouped.csv'.format(path))
+
+# Df com países escolhidos
 df = data[data['Country/Region'].isin(['Mexico', 'Argentina', 
                                         'Ecuador', 'Chile', 'Spain'])]
 df['Date'] = pd.to_datetime(df.Date, format="%Y-%m-%d")
