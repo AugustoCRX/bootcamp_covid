@@ -67,7 +67,7 @@ def main(output_filepath):
   print('Loading csv files...')
   countries = os.listdir(r'{}\data\external\twitter'.format(project_dir))
   
-  #A query abaixo é uma tabela que contém dados de todos os paises e possui todas as colunas.
+ #The query below is a table that contains data from all countries and has all columns.
   query_AI_twitter = ''
   for i in countries:
     if i != countries[-1]:
