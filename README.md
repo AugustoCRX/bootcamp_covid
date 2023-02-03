@@ -39,7 +39,7 @@ Project Organization
     ├── env                <- Virtual environment
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │   ├── MySQL models   <- MYSQL Models
+    │   └── MySQL models   <- MYSQL Models
     │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │                         the creator's initials, and a short `-` delimited description, e.g.
