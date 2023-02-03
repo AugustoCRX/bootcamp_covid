@@ -8,7 +8,7 @@
         
 <h3>Lucílio Fontes Moura&nbsp;&nbsp&nbsp;<a href = "https://github.com/LucilioFM" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/luciliofm/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
 
-<h3>Bruno Rodrigues Barbosa&nbsp;&nbsp&nbsp;<a href = "https://github.com/brunodatac" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/bruno-rodrigues-40b555232/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
+<h3>Bruno Rodrigues Barbosa&nbsp;&nbsp&nbsp;<a href = "https://github.com/brunodatac" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/bruno-datascience/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
 
 
 &nbsp;
@@ -26,13 +26,27 @@ Project Organization
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    │   ├── bi_data        <- Data from third party sources.
+    │   ├── bronze         <- Intermediate data that has been transformed.
+    |   |       └── twitter_bronze
+    │   ├── external       <- The final, canonical data sets for modeling.
+    |   |       └── covid_data
+    |   |       └── twitter
+    |   ├── golden
+    |   ├── results_model_forecast
+    |   ├── results_twitter
+    |   ├── silver
+    |   |       └── covid
+    |   |       └── twitter
+    │   └── twitter_ai     <- The original, immutable data dump.
+    |           └── models
+    |           └── results
+    |           └── train
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
+    ├── env
+    |
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
@@ -43,11 +57,12 @@ Project Organization
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
     │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+    |
+    ├── requirements.txt<- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    |
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
     │   │
