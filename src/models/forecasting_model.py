@@ -23,6 +23,7 @@ def create_series(df, country):
     :param country: Nome do país
     :return: Série temporal com a quantidade de casos confirmados e mortes.
     """
+    
     country_filter = df[df['Country/Region'] == country]
     country_data = country_filter[['Date', 'Confirmed', 'Deaths']]
     country_data['Date'] = pd.to_datetime(country_data['Date'])
@@ -38,6 +39,7 @@ class SARIMAXModel():
         :param data: Série temporal
         :param column: Coluna a ser utilizada no modelo
         """
+        
         self.data = data
         self.column = column
 
@@ -45,6 +47,7 @@ class SARIMAXModel():
         """
         Executa o processo de treinamento e previsão do modelo SARIMAX.
         """
+        
         X = self.data.groupby('Date')[self.column].sum().copy()
         stepwise_fit = auto_arima(X, start_p=0, start_q=0, 
                                     max_p=6, max_q=3, m=7,
@@ -159,8 +162,6 @@ cnx = mysql.connector.connect(
                              )
 
 cur = cnx.cursor() # Criação do cursor para manipulação do banco de dados
-
-
 query_ts = 'SELECT * FROM covid_raw_data' # String com a query a ser executada
 data = pd.read_sql(query_ts, engine).drop('index', 1)
 
