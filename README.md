@@ -1,7 +1,7 @@
-### Projeto Blue - Bootcamp 2
-### Grupo 02
-### Turma: C014
-### Integrantes:
+## Projeto Blue - Bootcamp 2
+## Grupo 02
+## Turma: C014
+## Integrantes:
 
 <div>&nbsp;</div>
 <h3>Augusto Cesar Rodrigues Xavier&nbsp;&nbsp<a href = "https://github.com/AugustoCRX" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/augustocrx/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
@@ -26,20 +26,39 @@ Project Organization
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── bi_data        <- Data used for BI analysis
-    │   ├── results_model_forecast <- Results from forecast model
-    │   ├── twitter_ai     <- Results from Twitter sentiment analysis
-    │   ├── silver         <- Intermediate data that has been transformed.
-    │   ├── golden         <- The final, canonical data sets for modeling.
-    │   └── bronze         <- The original, immutable data dump.
+    │   ├── bi_data        <- Data from third party sources.
+    │   ├── bronze         <- Intermediate data that has been transformed.
+    |   |       └── twitter_bronze
+    │   ├── external       <- The final, canonical data sets for modeling.
+    |   |       └── covid_data
+    |   |       └── twitter
+    |   ├── golden
+    |   ├── results_model_forecast
+    |   ├── results_twitter
+    |   ├── silver
+    |   |       └── covid
+    |   |       └── twitter
+    │   └── twitter_ai     <- The original, immutable data dump.
+    |           └── models
+    |           └── results
+    |           └── train
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
-    ├── env                <- Virtual environment
-    │
+    ├── env
+    |   ├── conda-meta
+    |   ├── DLLs
+    |   ├── etc
+    |   ├── include
+    |   ├── Lib
+    |   ├── Library
+    |   ├── libs
+    |   ├── Scripts
+    |   ├── share
+    |   ├── tcl
+    |   └── Tools
+    |
     ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │   └── MySQL models   <- MYSQL Models
     │
     ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
     │                         the creator's initials, and a short `-` delimited description, e.g.
@@ -49,21 +68,28 @@ Project Organization
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
     │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+    |
+    ├── requirements.txt<- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    |
     ├── src                <- Source code for use in this project.
+    │   ├── __init__.py    <- Makes src a Python module
     │   │
     │   ├── data           <- Scripts to download or generate data
+    │   │   └── make_dataset.py
     │   │
     │   ├── features       <- Scripts to turn raw data into features for modeling
+    │   │   └── build_features.py
     │   │
     │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │                  predictions
+    │   │   │                 predictions
+    │   │   ├── predict_model.py
+    │   │   └── train_model.py
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
+    │       └── visualize.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
