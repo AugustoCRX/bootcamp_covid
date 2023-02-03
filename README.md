@@ -3,7 +3,7 @@
 ### Turma: C014
 ### Integrantes:
 
-<div>&nbsp;</div>
+<div></div>
 <h3>Augusto Cesar Rodrigues Xavier&nbsp;&nbsp<a href = "https://github.com/AugustoCRX" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/augustocrx/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
         
 <h3>Lucílio Fontes Moura&nbsp;&nbsp&nbsp;<a href = "https://github.com/LucilioFM" target = "_blank"><img src = "https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/AugustoCRX" target = "_blank"></img>&nbsp;&nbsp;&nbsp;</a><a href = "https://www.linkedin.com/in/luciliofm/" target = "_blank"><img src = "https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/augustocrx/" target = "_blank"></img></h3>
