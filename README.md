@@ -46,17 +46,6 @@ Project Organization
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
     ├── env
-    |   ├── conda-meta
-    |   ├── DLLs
-    |   ├── etc
-    |   ├── include
-    |   ├── Lib
-    |   ├── Library
-    |   ├── libs
-    |   ├── Scripts
-    |   ├── share
-    |   ├── tcl
-    |   └── Tools
     |
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
